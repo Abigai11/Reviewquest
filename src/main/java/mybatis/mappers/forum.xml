@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.forum">
+   <resultMap id="forumResult" type="com.project.reviewquest.forum.ForumDTO">
+      <result property="num" column="num"/>
+      <result property="name" column="name"/>
+      <result property="title" column="title"/>
+      <result property="content" column="content"/>
+      <result property="hit" column="hit"/>
+      <result property="writeDate" column="writeDate"/>
+      <result property="replyCnt" column="reply_cnt"/>   
+   </resultMap>
+   
+   <resultMap id="newsResult" type="com.project.reviewquest.news.NewsDTO">
+      <result property="num" column="num"/>
+      <result property="name" column="name"/>
+      <result property="title" column="title"/>
+      <result property="content" column="content"/>
+      <result property="hit" column="hit"/>
+      <result property="writeDate" column="writeDate"/>
+   </resultMap>
+	
+	<!-- 게시글 추가 -->
+	<insert id="insertForum">
+		<![CDATA[
+			insert into forum(num, name, title, content, hit)
+			values(#{num}, #{name}, #{title}, #{content}, #{hit})
+		]]>
+	</insert>
+	
+	<!-- 게시글 조회 -->
+	<select id="readForum" resultMap="forumResult">
+		<![CDATA[
+			select num, name, title, content, hit, writeDate, reply_cnt
+			from forum 
+			where num=#{num}
+		]]>
+	</select>
+	
+	<!-- 게시글 전체 목록 -->
+	<select id="newsList" resultMap="forumResult">
+		<![CDATA[
+			select  num, name, title, content, hit, writeDate
+			from news 
+			where num>0 
+			order by num desc, writeDate desc
+			limit 3
+		]]>
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateForum">
+		<![CDATA[
+			update forum 
+			set title=#{title}, content=#{content}
+			where num=#{num}
+		]]>
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteForum">
+		<![CDATA[
+			delete from forum 
+			where num=#{num}
+		]]>
+	</delete>
+	
+	<!-- 전체 게시글 갯수 -->
+	<select id="countForum" resultType="int">
+		<![CDATA[
+			select count(num)
+			from forum
+			where num>0
+		]]>
+	</select>
+	
+	<!-- 검색된 목록 -->
+	<select id="searchForum" resultMap="forumResult">
+		<![CDATA[
+			select num, name, title, content, hit, writeDate, reply_cnt
+			from forum
+			where num>0
+		]]>
+		<include refid="search"/>
+		<![CDATA[
+			order by num desc, writeDate desc
+			limit #{pageStart}, #{pageNum}
+		]]>
+	</select>
+	
+	<!-- 댓글 갯수 갱신 -->
+	<update id="updateReplyCnt">
+		<![CDATA[
+			update forum
+			set reply_cnt = reply_cnt + #{amount}
+			where num = #{num}
+		]]>
+	</update>
+	
+	<!-- 조회수 갱신 -->
+	<update id="updateViewCnt">
+		<![CDATA[
+			update forum
+			set hit = hit + 1
+			where num = #{num}
+		]]>
+	</update>
+	
+	<!-- 검색된 개수 -->
+	<select id="countSearchForum" resultType="int">
+		<![CDATA[
+			select count(num)
+			from forum
+			where num > 0
+		]]>
+		<include refid="search"/>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and(title like CONCAT('%', #{keyword}, '%')
+				 or content like CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and(title like CONCAT('%', #{keyword}, '%')
+				 or name like CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and(title like CONCAT('%', #{keyword}, '%')
+				 or content like CONCAT('%', #{keyword}, '%')
+				 or name like CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+</mapper>

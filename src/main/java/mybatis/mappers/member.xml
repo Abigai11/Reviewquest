@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+   <resultMap id="EmailDTOResult" type="EmailDTO">
+      <result property="email" column="email"/>
+      <result property="verificationcode" column="verificationcode"/>
+   </resultMap>
+   
+	<insert id="insert_Verificationcode" parameterType="EmailDTO">
+		<![CDATA[
+			insert into verification(email, verificationcode) values(#{email}, #{verificationcode})
+		]]>
+	</insert>
+	
+	 <select id="confirm_Verificationcode" parameterType="EmailDTO" resultType="int">
+	<![CDATA[
+			select COUNT(*) from verification where email=#{email} and verificationcode=#{verificationcode}
+		]]>
+	</select>
+
+
+   <resultMap id="InfluencerResult" type="InfluencerDTO">
+      <result property="division" column="division"/>
+      <result property="id" column="id"/>
+      <result property="password" column="password"/>
+      <result property="name" column="name"/>
+      <result property="nickName" column="nickName"/>
+      <result property="birthday" column="birthday"/>
+      <result property="email" column="email"/>
+      <result property="profilephoto" column="profilephoto"/>
+      <result property="phoneNo" column="phoneNo"/>
+      <result property="address" column="address"/>
+      <result property="introduce" column="introduce"/>
+      <result property="urlSNS" column="urlSNS"/>
+      <result property="urlYoutube" column="urlYoutube"/>
+      <result property="urlNaver" column="urlNaver"/>
+      <result property="joinDate" column="joinDate"/>
+   </resultMap>
+   
+   
+   
+   <select id="selectOverlapped_ID_influencer" parameterType="String" resultType="int">
+	<![CDATA[
+			SELECT COUNT(*) FROM influencer WHERE id = #{id}
+		]]>
+	</select>
+	
+	<select id="selectOverlapped_nickName_influencer" parameterType="String" resultType="int">
+	<![CDATA[
+			SELECT COUNT(*) FROM influencer WHERE nickName = #{nickName}
+		]]>
+	</select>
+
+	<insert id="insertMember_influencer" parameterType="InfluencerDTO">
+		<![CDATA[
+			insert into influencer(division, id, password, name, nickName, birthday, email, profilephoto, phoneNo, address, introduce, urlSNS, urlYoutube, urlNaver)
+			values(#{division}, #{id}, #{password}, #{name}, #{nickName}, #{birthday}, #{email}, #{profilephoto}, #{phoneNo}, #{address}, #{introduce}, #{urlSNS}, #{urlYoutube}, #{urlNaver})
+		]]>
+	</insert>
+	
+	<select id="loginCheck_influencer" resultType="String">
+		select name from influencer where id=#{id} and password=#{password}
+	</select>
+
+	<select id="viewMember_influencer" resultType="InfluencerDTO">
+		select * from influencer where id=#{id}
+	</select>
+
+	<select id="selectMemberById" resultType="InfluencerDTO" parameterType="String">
+		<![CDATA[
+			select * from influencer where id=#{id}
+		]]>
+	</select>
+	
+	<update id="updateMember" parameterType="InfluencerDTO">
+		<![CDATA[
+			update influencer set password=#{password}, name=#{name}, gender=#{gender}, email=#{email}, phone=#{phone}, address=#{address}, snsURL=#{snsURL} where id=#{id}
+		]]>
+	</update>
+	
+	<select id="passwordForMod_influencer" resultType="String">
+		select password from influencer where id=#{id}
+	</select>
+	
+	<update id="modMember_influencer" parameterType="InfluencerDTO">
+		<![CDATA[
+			update influencer set password=#{password}, name=#{name}, nickName=#{nickName}, email=#{email}, phoneNo=#{phoneNo}, address=#{address}, introduce=#{introduce}, urlSNS=#{urlSNS}, urlYoutube=#{urlYoutube}, urlNaver=#{urlNaver} where id=#{id}
+		]]>
+	</update>
+	
+	<delete id="delete_influencer" parameterType="String">
+		<![CDATA[
+			delete from influencer where id=#{id}
+		]]>
+	</delete>
+	
+	<select id="logoutCheck" parameterType="String" resultType="String">
+		select id from influencer where id=#{id}
+	</select>
+	
+	
+	<resultMap id="AdminDTOResult" type="AdminDTO">
+      <result property="division" column="division"/>
+      <result property="id" column="id"/>
+      <result property="password" column="password"/>
+      <result property="name" column="name"/>
+      <result property="nickName" column="nickName"/>
+      <result property="email" column="email"/>
+      <result property="phoneNo" column="phoneNo"/>
+   </resultMap>
+   
+    <select id="selectOverlapped_ID_admin" parameterType="String" resultType="int">
+			<![CDATA[
+					SELECT COUNT(*) FROM admin WHERE id = #{id}
+				]]>
+			</select>
+			
+	<select id="selectOverlapped_nickName_admin" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM admin WHERE nickName = #{nickName}
+		]]>
+	</select>
+		
+   	<select id="loginCheck_admin" resultType="String">
+		select name from admin where id=#{id} and password=#{password}
+	</select>
+	
+	<select id="logoutCheck_admin" parameterType="String" resultType="String">
+		select id from admin where id=#{id}
+	</select>
+	
+	<select id="viewMember_admin" resultType="AdminDTO">
+		select * from admin where id=#{id}
+	</select>
+	
+	<select id="listMembers_influencer" resultType="InfluencerDTO">
+		<![CDATA[
+			select * from influencer order by joinDate desc
+		]]>
+	</select>
+	<select id="listMembers_company" resultType="CompanyDTO">
+		<![CDATA[
+			select * from company order by joinDate desc
+		]]>
+	</select>
+	
+	
+	
+	<resultMap id="CompanyDTOResult" type="CompanyDTO">
+      <result property="division" column="division"/>
+      <result property="id" column="id"/>
+      <result property="password" column="password"/>
+      <result property="name" column="name"/>
+      <result property="nickName" column="nickName"/>
+      <result property="email" column="email"/>
+      <result property="phoneNo" column="phoneNo"/>
+      <result property="address" column="address"/>
+      <result property="companyName" column="companyName"/>
+      <result property="businessNO" column="businessNO"/>
+      <result property="companyTel" column="companyTel"/>
+      <result property="introduce" column="introduce"/>
+      <result property="joinDate" column="joinDate"/>
+   </resultMap>
+
+		<insert id="insertMember_company" parameterType="CompanyDTO">
+		<![CDATA[
+			insert into company(division, id, password, name, nickName, email, profilephoto, phoneNo, address, companyName, businessNO, companyTel, introduce)
+			values(#{division}, #{id}, #{password}, #{name}, #{nickName}, #{email}, #{profilephoto}, #{phoneNo}, #{address}, #{companyName}, #{businessNO}, #{companyTel}, #{introduce})
+		]]>
+		</insert>
+		
+		 <select id="selectOverlapped_ID_company" parameterType="String" resultType="int">
+			<![CDATA[
+					SELECT COUNT(*) FROM company WHERE id = #{id}
+				]]>
+			</select>
+			
+		<select id="selectOverlapped_nickName_company" parameterType="String" resultType="int">
+			<![CDATA[
+				SELECT COUNT(*) FROM company WHERE nickName = #{nickName}
+			]]>
+		</select>
+	
+		<select id="selectOverlapped_businessNO" parameterType="String" resultType="int">
+		<![CDATA[
+				SELECT COUNT(*) FROM company WHERE businessNO = #{businessNO}
+			]]>
+		</select>
+				
+		<select id="loginCheck_company" resultType="String">
+			select name from company where id=#{id} and password=#{password}
+		</select>
+		
+		<select id="viewMember_company" resultType="CompanyDTO">
+			select * from company where id=#{id}
+		</select>
+		
+		<select id="passwordForMod_company" resultType="String">
+		select password from company where id=#{id}
+		</select>
+		
+		<update id="modMember_company" parameterType="CompanyDTO">
+		<![CDATA[
+			update company set password=#{password}, name=#{name}, nickName=#{nickName}, email=#{email}, phoneNo=#{phoneNo}, address=#{address}, companyName=#{companyName}, businessNO=#{businessNO}, companyTel=#{companyTel}, introduce=#{introduce} where id=#{id}
+		]]>
+		</update>
+		
+		<delete id="delete_company" parameterType="String">
+		<![CDATA[
+			delete from company where id=#{id}
+		]]>
+	</delete>
+	
+	
+	
+	
+	
+	
+	         <!-- Member 조회 (ID로) -->
+   <select id="getMemberById" resultType="memberDTO">
+       <!-- ID로 캠페인 정보를 조회하는 SQL -->
+       SELECT * FROM member WHERE id = #{id}
+   </select>
+   
+        <select id="getInfluencerData" resultType="java.lang.Integer">
+      SELECT IFNULL(data.count, 0) AS count, months.month
+      FROM (
+        SELECT 1 AS month
+        UNION SELECT 2
+        UNION SELECT 3
+        UNION SELECT 4
+        UNION SELECT 5
+        UNION SELECT 6
+        UNION SELECT 7
+        UNION SELECT 8
+        UNION SELECT 9
+        UNION SELECT 10
+        UNION SELECT 11
+        UNION SELECT 12
+      ) AS months
+      LEFT JOIN (
+        SELECT COUNT(*) AS count, MONTH(joinDate) AS month
+        FROM influencer
+        WHERE division = 'influencer'
+        GROUP BY month
+      ) AS data ON months.month = data.month
+      ORDER BY months.month;
+    </select>
+
+    <select id="getCompanyData" resultType="java.lang.Integer">
+      SELECT IFNULL(data.count, 0) AS count, months.month
+      FROM (
+        SELECT 1 AS month
+        UNION SELECT 2
+        UNION SELECT 3
+        UNION SELECT 4
+        UNION SELECT 5
+        UNION SELECT 6
+        UNION SELECT 7
+        UNION SELECT 8
+        UNION SELECT 9
+        UNION SELECT 10
+        UNION SELECT 11
+        UNION SELECT 12
+      ) AS months
+      LEFT JOIN (
+        SELECT COUNT(*) AS count, MONTH(joinDate) AS month
+        FROM company
+        WHERE division = 'company'
+        GROUP BY month
+      ) AS data ON months.month = data.month
+      ORDER BY months.month;
+    </select>
+        
+    <select id="getInfluencerCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM influencer
+    </select>
+    
+    <select id="getCompanyCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM company
+    </select>
+    
+    <select id="getCampaignCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM campaign
+    </select>
+    
+    <select id="getApplicationCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM applications
+    </select>
+</mapper>
+
+
+

@@ -1,0 +1,191 @@
+.page_now {
+    background:#0067ff;
+    border:1px solid #0067ff;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    vertical-align:middle;
+    color:#fff;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+
+.page_now a { color:#fff;}
+
+.page_nomal {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    vertical-align:middle;
+    color:#666666;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+
+.page_nomal a { color:#666666; width:40px; height:40px; display:inline-block; line-height:40px; }
+.page_nomal:hover { border:1px solid #0067ff; }
+.page_nomal:hover a { color:#0067ff; }
+
+.page_prev0 {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#666666;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_prev0 a { color:#666666; width:40px; height:40px; display:inline-block; line-height:40px; }
+.page_prev0 img { margin-top:10px; }
+.page_prev0 svg { margin-top:10px; }
+.page_prev0:hover { border:1px solid #0067ff; }
+.page_prev0:hover a { color:#0067ff; }
+
+.page_next0 {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#666666;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_next0 a { color:#666666; width:40px; height:40px; display:inline-block; line-height:40px;}
+.page_next0 img { margin-top:10px; }
+.page_next0 svg { margin-top:10px; }
+.page_next0:hover { border:1px solid #0067ff; }
+.page_next0:hover a { color:#0067ff; }
+
+.page_next {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#666666;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_next a { color:#666666; width:40px; height:40px; display:inline-block; line-height:40px;}
+.page_next img { margin-top:10px; border:!px solid red;}
+.page_next svg { margin-top:10px; border:!px solid red;}
+.page_next:hover { border:1px solid #0067ff; }
+.page_next:hover a { color: #0067ff; }
+
+
+.page_prev {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#666666;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+    line-height:40px;
+}
+.page_prev a { color:#666666; width:40px; height:40px; display:inline-block; line-height:40px; }
+.page_prev img { margin-top:10px; }
+.page_prev svg { margin-top:10px; }
+.page_prev:hover { border:1px solid #0067ff; }
+.page_prev:hover a { color:#0067ff; }
+
+.page_prev0_no {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#bebebe;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_prev0_no { color:#bebebe; line-height:40px; }
+.page_prev0_no img { margin-top:10px; }
+.page_prev0_no svg { margin-top:10px; }
+
+.page_prev_no {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#bebebe;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_prev_no { color:#bebebe; line-height:40px; }
+.page_prev_no img { margin-top:10px; }
+.page_prev_no svg { margin-top:10px; }
+
+.page_next0_no {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#bebebe;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_next0_no { color:#bebebe; line-height:40px;}
+.page_next0_no img { margin-top:10px; }
+.page_next0_no svg { margin-top:10px; }
+
+.page_next_no {
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+    color:#bebebe;
+    float:left;
+    text-align:center;
+    margin-right:5px;
+    border-radius:0.2em;
+    font-size:14px;
+}
+.page_next_no { color:#bebebe; line-height:40px;}
+.page_next_no img { margin-top:10px; }
+.page_next_no svg { margin-top:10px; }
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.donation">
+   <resultMap id="donationResult" type="com.project.reviewquest.donation.DonationDTO">
+      <result property="num" column="num"/>
+      <result property="title" column="title"/>
+      <result property="office" column="office"/>
+      <result property="content" column="content"/>
+      <result property="fileName" column="file_name"/>
+      <result property="filePath" column="file_path"/>
+      <result property="date" column="date"/>
+      <result property="endDate" column="end_date"/>
+      <result property="amount" column="amount"/>  
+      <result property="targetAmount" column="target_amount"/>  
+      <result property="people" column="people"/>   
+   </resultMap>
+	
+	<!-- 게시글 추가 -->
+	<insert id="donationCreate">
+		<![CDATA[
+			insert into donation(num, title, office, content, file_name, file_path,
+			end_date, amount, target_amount, people)
+			values(#{num}, #{title}, #{office}, #{content}, #{fileName}, #{filePath}, 
+			#{endDate}, #{amount}, #{targetAmount}, #{people})
+		]]>
+	</insert>
+	
+	<!-- 게시글 조회 -->
+	<select id="donationRead" resultMap="donationResult">
+		<![CDATA[
+			select num, title, office, content, file_name, file_path, 
+			end_date, amount, target_amount, people, date
+			from donation 
+			where num=#{num}
+		]]>
+	</select>
+	
+	<!-- 게시글 전체 목록 -->
+	<select id="donationList" resultMap="donationResult">
+		<![CDATA[
+			select  num, title, office, file_path, end_date, amount, target_amount, people
+			from donation 
+			where num>0 
+			order by num desc, date desc
+			limit #{pageStart}, #{pageNum}
+		]]>
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="donationUpdate">
+		<![CDATA[
+			update donation 
+			set title=#{title}, content=#{content}, file_name=#{fileName}, file_path=#{filePath}
+			, office=#{office}, end_date=#{endDate}, target_amount=#{targetAmount}
+			where num=#{num}
+		]]>
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="donationDelete">
+		<![CDATA[
+			delete from donation
+			where num=#{num}
+		]]>
+	</delete>
+	
+	<!-- 기부금액 업데이트 -->
+	<update id="amountUpdate">
+		<![CDATA[
+			update donation 
+			set amount=#{amount}, people = people + 1
+			where num=#{num}
+		]]>
+	</update>
+	
+	<!-- 검색된 목록 -->
+	<select id="donationSearch" resultMap="donationResult">
+		<![CDATA[
+			select num, title, office, content, file_name, file_path,
+			end_date, amount, target_amount, people, date
+			from donation
+			where num>0
+		]]>
+		<include refid="search"/>
+		<![CDATA[
+			order by num desc, date desc
+			limit #{pageStart}, #{pageNum}
+		]]>
+	</select>
+	
+	<!-- 검색된 개수 -->
+	<select id="donationCount" resultType="int">
+		<![CDATA[
+			select count(num)
+			from donation
+			where num > 0
+		]]>
+		<include refid="search"/>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and office like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and(title like CONCAT('%', #{keyword}, '%')
+				 or content like CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and(title like CONCAT('%', #{keyword}, '%')
+				 or office like CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and(title like CONCAT('%', #{keyword}, '%')
+				 or content like CONCAT('%', #{keyword}, '%')
+				 or office like CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+</mapper>

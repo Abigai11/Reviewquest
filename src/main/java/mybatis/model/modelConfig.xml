@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.project.reviewquest.member.InfluencerDTO" alias="InfluencerDTO"/>
+		<typeAlias type="com.project.reviewquest.member.CompanyDTO" alias="CompanyDTO"/>			
+		<typeAlias type="com.project.reviewquest.member.AdminDTO" alias="AdminDTO"/>
+		<typeAlias type="com.project.reviewquest.member.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.project.reviewquest.member.EmailDTO" alias="EmailDTO"/>
+		<typeAlias type="com.project.reviewquest.forum.ForumDTO" alias="ForumDTO"/>
+		<typeAlias type="com.project.reviewquest.reply.ReplyDTO" alias="ReplyDTO"/>
+		<typeAlias type="com.project.reviewquest.review.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.project.reviewquest.news.NewsDTO" alias="NewsDTO"/>
+		<typeAlias type="com.project.reviewquest.donation.DonationDTO" alias="DonationDTO"/>	
+		<typeAlias type="com.project.reviewquest.campaign.CampaignDTO" alias="CampaignDTO"/>
+		<typeAlias type="com.project.reviewquest.campaign.ApplicationDTO" alias="ApplicationDTO"/>
+	</typeAliases>
+    <typeHandlers>
+        <typeHandler handler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+    </typeHandlers>
+</configuration>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.review">
+   <resultMap id="reviewResult" type="com.project.reviewquest.review.ReviewDTO">
+      <result property="contentNo" column="content_no"/>
+      <result property="reviewNo" column="review_no"/>
+      <result property="url" column="url"/>
+      <result property="word" column="word"/>
+      <result property="name" column="name"/>
+      <result property="reDate" column="re_date"/>
+      <result property="filePath" column="file_path"/>
+   </resultMap>
+   
+   <!-- 리뷰 조회 -->
+   <select id="listReview" resultMap="reviewResult">
+   		<![CDATA[
+			select content_no, review_no, url, word, name, re_date, file_path
+			from review 
+			where content_no = #{contentNo}
+			order by re_date desc
+		]]>
+   </select>
+   
+   <!-- 리뷰 추가 -->
+   <insert id="createReview">
+   		<![CDATA[
+			insert into review(content_no, url, word, name, file_path)
+			values(#{contentNo}, #{url}, #{word}, #{name}, #{filePath})
+		]]>
+   </insert>
+   
+   <!-- 리뷰 상세 -->
+   <select id="readReview" resultMap="reviewResult">
+   		<![CDATA[
+			select content_no, review_no, url, word, name, re_date, file_path
+			from review 
+			where review_no = #{reviewNo}
+			order by review_no
+		]]>
+   </select>
+   
+   <!-- 리뷰 수정 -->
+   <update id="updateReview">
+   		<![CDATA[
+			update review
+			set url = #{url}, word = #{word}, name = #{name}
+			where review_no = #{reviewNo}
+		]]>
+   </update>
+   
+   <!-- 리뷰 삭제 -->
+   <delete id="deleteReply">
+   		<![CDATA[
+			delete from review
+			where review_no = #{reviewNo}
+		]]>
+   </delete>
+   
+   <!-- 페이징 -->
+   <select id="replyPaging" resultMap="reviewResult">
+   		<![CDATA[
+			select content_no, review_no, url, word, name, re_date
+			from review 
+			where content_no = #{contentNo}
+			order by re_date desc
+			limit #{reviewPage.startPage}, #{reviewPage.pageNum}
+		]]>
+   </select>
+   
+   <!-- 총 댓글 수 -->
+   <select id="countReview" resultType="Long">
+   		<![CDATA[
+			select count(content_no)
+			from review
+			where content_no = #{contentNo}
+		]]>
+   </select>
+
+</mapper>

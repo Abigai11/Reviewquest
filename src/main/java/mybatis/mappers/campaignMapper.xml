@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CampaignDAO">
+
+<insert id="insertCampaign" parameterType="com.project.reviewquest.campaign.CampaignDTO">
+    <!-- 캠페인 정보를 데이터베이스에 추가하는 SQL -->
+        <![CDATA[
+        INSERT INTO campaign (city, region, campaignName, campaignPrice, startDate, endDate, selectDate, registrationStart, registrationEnd, providedDetails, keyword, notification, companyInformation, campaignTypes, imageFileName, imageFilePath, detailimageFileNames, detailimageFilePaths, subImageFileNames, subImageFilePaths, mainCategory, subCategory, selectedCandidates)
+        VALUES (
+            #{city}, 
+            #{region}, 
+            #{campaignName}, 
+            #{campaignPrice}, 
+            #{startDate}, 
+            #{endDate}, 
+            #{selectDate}, 
+            #{registrationStart},
+            #{registrationEnd},
+            #{providedDetails}, 
+            #{keyword}, 
+            #{notification},
+            #{companyInformation},
+            #{campaignTypes, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+            #{imageFileName}, 
+            #{imageFilePath}, 
+            #{detailimageFileNames, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler}, 
+            #{detailimageFilePaths, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler}, 
+            #{subImageFileNames, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+            #{subImageFilePaths, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+            #{mainCategory}, 
+            #{subCategory},
+            #{selectedCandidates}
+        )
+        ]]>
+</insert>
+
+
+<!-- Campaign 수정 폼에 이미지 업로드 필드 추가 -->
+<update id="updateCampaign" parameterType="com.project.reviewquest.campaign.CampaignDTO">
+    <!-- 캠페인 정보와 이미지 정보를 데이터베이스에 수정하는 SQL -->
+    <![CDATA[
+    UPDATE campaign
+    SET 
+        campaignName = #{campaignName},
+        campaignPrice = #{campaignPrice},
+        startDate = #{startDate},
+        endDate = #{endDate},
+        selectDate = #{selectDate},
+        registrationStart = #{registrationStart},
+        registrationEnd = #{registrationEnd},
+		campaignTypes = #{campaignTypes, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+        imageFileName = #{imageFileName},
+        imageFilePath = #{imageFilePath},
+        detailimageFileNames = #{detailimageFileNames, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+        detailimageFilePaths = #{detailimageFilePaths, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+        subImageFileNames = #{subImageFileNames, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+        subImageFilePaths = #{subImageFilePaths, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+        providedDetails = #{providedDetails},
+        keyword = #{keyword},
+        notification = #{notification},
+        companyInformation = #{companyInformation},
+        mainCategory = #{mainCategory},
+        subCategory = #{subCategory},
+        city = #{city},
+        region = #{region},
+        selectedCandidates = #{selectedCandidates}
+    WHERE id = #{id}
+    ]]>
+</update>
+
+	
+<!-- Campaign 삭제 -->
+<delete id="deleteCampaign" parameterType="java.lang.Long">
+    <!-- 캠페인 정보를 데이터베이스에서 삭제하는 SQL -->
+    <![CDATA[
+    DELETE FROM campaign WHERE id = #{id}
+    ]]>
+</delete>
+
+<!-- Campaign 조회 (ID로) -->
+<select id="getCampaignById" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <!-- ID로 캠페인 정보를 조회하는 SQL -->
+    <![CDATA[
+    SELECT * FROM campaign WHERE id = #{id}
+    ]]>
+</select>
+
+
+<resultMap id="campaignResultMap" type="com.project.reviewquest.campaign.CampaignDTO">
+    <!-- 다른 필드들을 여기에 매핑 -->
+    <result property="subImageFileNames" column="subImageFileNames" jdbcType="VARCHAR" javaType="java.lang.String" typeHandler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+    <result property="subImageFilePaths" column="subImageFilePaths" jdbcType="VARCHAR" javaType="java.lang.String" typeHandler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+    <result property="detailimageFileNames" column="detailimageFileNames" jdbcType="VARCHAR" javaType="java.lang.String" typeHandler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+    <result property="detailimageFilePaths" column="detailimageFilePaths" jdbcType="VARCHAR" javaType="java.lang.String" typeHandler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+    <result property="campaignTypes" column="campaignTypes" jdbcType="VARCHAR" javaType="java.lang.String" typeHandler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+</resultMap>
+
+
+<!-- 특정 카테고리에 따라 캠페인 필터링 및 페이징 조회 (MainCategory) -->
+<select id="getCampaignsBymainCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[    
+    SELECT *
+    FROM campaign
+    WHERE mainCategory = #{mainCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+	
+<!-- 특정 카테고리에 따라 캠페인 필터링 및 페이징 조회 (subCategory) -->
+<select id="getCampaignsBysubCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE subCategory = #{subCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+
+<!-- 특정 city와 region에 따라 캠페인 필터링 및 페이징 조회 (City) -->
+<select id="getCampaignsByCityAndRegion" parameterType="map" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign 
+    WHERE city = #{city} AND region = #{region}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+	
+<!-- 특정 city에 따라 캠페인 필터링 및 페이징 조회 (City) -->
+<select id="getCampaignsByCity" parameterType="map" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign 
+    WHERE city = #{city}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+	
+		
+			
+<!-- 특정 region에 따라 캠페인 필터링 및 페이징 조회 (Region) -->
+<select id="getCampaignsByRegion" parameterType="map" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign 
+    WHERE region = #{region}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+
+    <!-- 캠페인 이름으로 검색하는 쿼리 -->
+<select id="getCampaignsByCampaignName" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    WHERE campaignName LIKE CONCAT('%', #{searchKeyword}, '%')
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+ 
+<!-- 캠페인 가격으로 검색하는 쿼리 -->
+<select id="getCampaignsByCampaignPrice" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    WHERE campaignPrice LIKE CONCAT('%', #{searchKeyword}, '%')
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+<!-- 캠페인 타입으로 검색하는 쿼리 -->
+<select id="getCampaignsByCampaignTypes" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    WHERE campaignTypes LIKE CONCAT('%', #{searchKeyword}, '%')
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+<!-- 캠페인 제공내역으로 검색하는 쿼리 -->
+<select id="getCampaignsByCampaignDetails" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    WHERE providedDetails LIKE CONCAT('%', #{searchKeyword}, '%')
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+    
+<!-- 캠페인 키워드로 검색하는 쿼리 -->
+<select id="getCampaignsByCampaignKeyword" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    WHERE keyword LIKE CONCAT('%', #{searchKeyword}, '%')
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>    
+      
+<!-- 캠페인 안내로 검색하는 쿼리 -->
+<select id="getCampaignsByCampaignInformation" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    WHERE companyInformation LIKE CONCAT('%', #{searchKeyword}, '%')
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+<!-- Campaign 총 개수 조회 -->
+<select id="getTotalCampaignCount" resultType="int">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    ]]>
+</select>
+	
+ <!-- getCampaignsByAllConditions -->
+<select id="getCampaignsByAllConditions" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE city = #{city}
+    AND region = #{region}
+    AND mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+    
+<!-- getCampaignsBycityRegionAndMainCategory -->
+<select id="getCampaignsBycityRegionAndMainCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE city = #{city}
+    AND region = #{region}
+    AND mainCategory = #{mainCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+    
+<!-- getCampaignsBycityMainCategoryAndSubCategory -->
+<select id="getCampaignsBycityMainCategoryAndSubCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE city = #{city}
+    AND mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+<!-- getCampaignsBycityAndMainCategory -->
+<select id="getCampaignsBycityAndMainCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE city = #{city}
+    AND mainCategory = #{mainCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+    
+<!-- getCampaignsByregionMainCategoryAndSubCategory -->
+<select id="getCampaignsByregionMainCategoryAndSubCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE region = #{region}
+    AND mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+<!-- getCampaignsByregionAndMainCategory -->
+<select id="getCampaignsByregionAndMainCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE region = #{region}
+    AND mainCategory = #{mainCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+    
+<!-- getCampaignsBymainCategoryAndSubCategory -->
+<select id="getCampaignsBymainCategoryAndSubCategory" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <![CDATA[
+    SELECT * FROM campaign
+    WHERE mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCityRegion -->
+<select id="getTotalCampaignsByCityRegion" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE city = #{city}
+    AND region = #{region}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCityMainCategoryAndSubCategory -->
+<select id="getTotalCampaignsByCityMainCategoryAndSubCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE city = #{city}
+    AND mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCityAndMainCategory -->
+<select id="getTotalCampaignsByCityAndMainCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE city = #{city}
+    AND mainCategory = #{mainCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCity -->
+<select id="getTotalCampaignsByCity" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE city = #{city}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByRegionMainCategoryAndSubCategory -->
+<select id="getTotalCampaignsByRegionMainCategoryAndSubCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE region = #{region}
+    AND mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByRegionAndMainCategory -->
+<select id="getTotalCampaignsByRegionAndMainCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE region = #{region}
+    AND mainCategory = #{mainCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByRegion -->
+<select id="getTotalCampaignsByRegion" resultType="int">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE region = #{region}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByMainCategoryAndSubCategory -->
+<select id="getTotalCampaignsByMainCategoryAndSubCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByMainCategory -->
+<select id="getTotalCampaignsByMainCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE mainCategory = #{mainCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsBySubCategory -->
+<select id="getTotalCampaignsBySubCategory" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE subCategory = #{subCategory}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCampaignName -->
+<select id="getTotalCampaignsByCampaignName" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE campaignName = #{searchKeyword}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCampaignPrice -->
+<select id="getTotalCampaignsByCampaignPrice" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE campaignPrice = #{searchKeyword}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCampaignTypes -->
+<select id="getTotalCampaignsByCampaignTypes" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE campaignTypes = #{searchKeyword}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCampaignDetails -->
+<select id="getTotalCampaignsByCampaignDetails" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE providedDetails = #{searchKeyword}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCampaignKeyword -->
+<select id="getTotalCampaignsByCampaignKeyword" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE keyword = #{searchKeyword}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCampaignInformation -->
+<select id="getTotalCampaignsByCampaignInformation" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE companyInformation = #{searchKeyword}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByCityAndRegion -->
+<select id="getTotalCampaignsByCityAndRegion" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE city = #{city}
+    AND region = #{region}
+    ]]>
+</select>
+
+<!-- getTotalCampaignsByAllConditions -->
+<select id="getTotalCampaignsByAllConditions" resultType="int" parameterType="map">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign
+    WHERE city = #{city}
+    AND region = #{region}
+    AND mainCategory = #{mainCategory}
+    AND subCategory = #{subCategory}
+    ]]>
+</select>
+
+<!-- 레코드 총 갯수 조회 쿼리 -->
+<select id="getTotalRecordCount" parameterType="map" resultType="int">
+    <![CDATA[
+    SELECT COUNT(*) FROM campaign WHERE city = #{city} AND region = #{region}
+    ]]>
+</select>
+
+<!-- 모든 Campaign 조회 (페이징 처리) -->
+<select id="getAllCampaigns" parameterType="java.lang.Long" resultMap="campaignResultMap">
+    <!-- 모든 캠페인 정보를 조회하는 SQL -->
+    <![CDATA[
+    SELECT *
+    FROM campaign
+    LIMIT #{page}, #{pageSize}
+    ]]>
+</select>
+   
+<update id="deleteImage" parameterType="java.lang.Long">
+    <!-- 대표 이미지 정보를 삭제하는 SQL -->
+    <![CDATA[
+    UPDATE campaign
+    SET imageFileName = null, imageFilePath = null
+    WHERE id = #{campaignId}
+    ]]>
+</update>
+		
+<!-- Campaign 상세 이미지 삭제 -->
+<update id="deleteDetailImage" parameterType="java.lang.Long">
+    <!-- 상세 이미지 정보를 삭제하는 SQL -->
+    <![CDATA[
+    UPDATE campaign
+    SET detailimageFileNames = null, detailimageFilePath = null
+    WHERE id = #{campaignId}
+    ]]>
+</update>
+	
+<!-- Campaign 서브 이미지 삭제 -->
+<update id="deleteSubImage" parameterType="com.project.reviewquest.campaign.CampaignDTO">
+    <!-- 서브 이미지 정보를 삭제하는 SQL -->
+    <![CDATA[
+    UPDATE campaign
+    SET subImageFileNames = #{subImageFileNames, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler},
+        subImageFilePaths = #{subImageFilePaths, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler}
+    WHERE id = #{id}
+    ]]>
+</update>
+
+
+ <insert id="insertApplication" parameterType="com.project.reviewquest.campaign.ApplicationDTO">
+ 	   <![CDATA[
+        INSERT INTO applications (nickName, campaignNum, snsURL, name, comment, Recipient, address, phone, email)
+        VALUES (#{nickName}, #{campaignNum}, #{snsURL, typeHandler=com.project.reviewquest.campaign.JsonTypeHandler}, #{name}, #{comment}, #{Recipient}, #{address}, #{phone}, #{email})
+     ]]>
+ </insert>
+
+<select id="selectApplication" resultType="com.project.reviewquest.campaign.ApplicationDTO">
+    <![CDATA[
+    SELECT * FROM applications WHERE campaignNum = #{id}
+    ]]>
+</select>
+        
+<update id="updateApplication" parameterType="com.project.reviewquest.campaign.ApplicationDTO">
+    <![CDATA[
+    UPDATE applications
+    SET nickName = #{nickName},
+    	campaignNum = #{campaignNum},
+        snsURL = #{snsURL},
+        name = #{name},
+        comment = #{comment},
+        Recipient = #{Recipient},
+        address = #{address},
+        phone = #{phone},
+        email = #{email}
+    WHERE campaignNum = #{id} AND nickName = #{nickName}
+    ]]>
+</update>
+
+<update id="contentApplication" parameterType="com.project.reviewquest.campaign.ApplicationDTO">
+    <![CDATA[
+    UPDATE applications
+    SET status = '콘텐츠 등록'
+    WHERE campaignNum = #{id} AND nickName = #{nickName}
+    ]]>
+</update>
+
+<delete id="deleteApplication">
+    <![CDATA[
+    DELETE FROM applications
+    WHERE campaignNum = #{id} AND nickName = #{nickName}
+    ]]>
+</delete>
+
+ 
+<update id="incrementApplicantsCount">
+    <![CDATA[
+    UPDATE campaign
+    SET applicants = applicants + 1
+    WHERE id = #{id}
+    ]]>
+</update>
+
+<update id="incrementApplicantsDelete">
+    <![CDATA[
+    UPDATE campaign
+    SET applicants = applicants - 1
+    WHERE id = #{id}
+    ]]>
+</update>
+
+<select id="getApplicationsByCampaignId" parameterType="java.lang.Long" resultMap="ApplicationMap">
+    <![CDATA[
+    SELECT * FROM applications WHERE campaignNum = #{id}
+    ]]>
+</select>
+
+<resultMap id="ApplicationMap" type="com.project.reviewquest.campaign.ApplicationDTO">
+    <result property="snsURL" column="snsURL" jdbcType="VARCHAR" javaType="java.lang.String" typeHandler="com.project.reviewquest.campaign.JsonTypeHandler"/>
+</resultMap>
+
+<update id="updateStatusToSelected">
+<![CDATA[
+    UPDATE applications SET status = '선정' WHERE campaignNum = #{campaignNum} AND id = #{id}
+]]> 
+</update>
+
+<update id="NotselectApplication">
+<![CDATA[
+    UPDATE applications SET status = '미선정' WHERE campaignNum = #{campaignNum} AND id = #{id}
+]]> 
+</update>
+
+<update id="updateStatusToCancel">
+<![CDATA[
+    UPDATE applications SET status = '선정취소' WHERE campaignNum = #{campaignNum} AND id = #{id}
+]]>
+</update>
+
+<select id="getBestCampaigns" parameterType="java.lang.Long" resultMap="campaignResultMap">
+<![CDATA[
+    SELECT * FROM campaign ORDER BY applicants DESC LIMIT 10
+]]>
+</select>
+
+    <select id="getNewCampaigns" parameterType="java.lang.Long" resultMap="campaignResultMap">
+<![CDATA[
+    SELECT * FROM campaign ORDER BY registrationDate DESC LIMIT 10
+]]>
+</select>
+
+    <select id="getDdayCampaigns" parameterType="java.lang.Long" resultMap="campaignResultMap">
+ <![CDATA[
+	SELECT * FROM campaign WHERE endDate >= CURDATE() AND endDate <= DATE_ADD(CURDATE(), INTERVAL 3 DAY) LIMIT 10
+	]]>
+</select>
+
+<select id="getApplications" resultType="com.project.reviewquest.campaign.ApplicationDTO">
+    SELECT *
+    FROM applications
+    WHERE campaignNum = #{id} AND nickName = #{nickName}
+</select>
+
+<select id="getNickApplications" resultType="com.project.reviewquest.campaign.ApplicationDTO">
+    SELECT * FROM applications WHERE nickName = #{nickName}
+</select>
+
+
+<select id="getMypageCampaigns" resultType="com.project.reviewquest.campaign.CampaignDTO">
+    SELECT * FROM campaign WHERE id = #{campaignNum}
+</select>
+
+<select id="getregistrationDates" resultType="com.project.reviewquest.campaign.ApplicationDTO">
+    SELECT *
+    FROM applications
+    WHERE campaignNum = #{id} AND nickName = #{nickName}
+</select>    
+
+<select id="getAllApplications" resultType="com.project.reviewquest.campaign.ApplicationDTO">
+	SELECT * FROM applications
+	WHERE registrationDate >= NOW() - INTERVAL 3 HOUR
+	LIMIT 10;
+</select>
+ 
+ </mapper>
+ 

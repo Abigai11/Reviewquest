@@ -1,0 +1,500 @@
+/* 寃뚯떆�먯긽�� */
+.bbs_top { border-top:1px solid #eaeaea;  padding:40px 0px; color:#222222;}
+
+/* 寃뚯떆�먭��� */
+.bbs_top_search { border-top:1px solid #eaeaea;  padding:20px 0px;}
+.bbs_top_search:after{content:""; display:block; clear:both; overflow:hidden}
+.bbs_top_search_left { float:left;}
+.bbs_top_search_left select { width:150px; float:left; margin-right:5px;}
+.bbs_top_search_right { float:right;}
+.bbs_top_search_right select,.bbs_top_search_right input,.bbs_top_search_right button { float:left; margin-left:5px !important;}
+
+
+/* 寃뚯떆�먮━�ㅽ듃 �쒕ぉ  */
+.bbs_rows_title{word-break:break-all;}
+.bbs_rows_title a:link { color:#333333; }
+.bbs_rows_title a:visited { color:#afafaf; }
+.bbs_rows_title a:active { color:#333333; }
+.bbs_rows_title a:hover { color:#333333;}
+.bbs_rows_title a:visited .bbs_cate{ color:#afafaf; }
+
+
+
+
+/* 寃뚯떆�먮━�ㅽ듃 �묒꽦�� �깅줉�� 踰덊샇  */
+.bbs_rows_by { color:#888888; }
+.bbs_rows_by a { color:#888888; }
+.bbs_rows_date { color:#888888; }
+.bbs_rows_num { color:#888888; }
+.bbs_rows_review { color:#999999; }
+.bbs_rows_review a { color:#999999; }
+
+
+/* �쒕ぉ�ㅼ뿉 �볤� �댁븘�댁퐯 異쒕젰遺�遺� �볤�梨꾪깮  */
+.bbs_rows_reply { color:#666666; white-space:nowrap;}
+.bbs_rows_reply img { margin-left:5px; margin-top:2px;}
+.bbs_rows_reply_choose  { margin-left:5px; }
+
+/* �쒕ぉ�� 移댄뀒怨좊━ */
+.bbs_cate span { margin-right:6px; }
+
+/* 寃뚯떆�먰븯�⑤쾭��(由ъ뒪��) */
+.bbs_bottom_btn { margin-top:20px;}
+.bbs_bottom_btn_left { float:left; }
+.bbs_bottom_btn_left a{ margin-right:5px; }
+.bbs_bottom_btn_right { float:right; }
+.bbs_bottom_btn_right a{ margin-left:5px; }
+
+/* 寃뚯떆�먰럹�댁쭠 */
+.bbs_page div { font-family:'留묒� 怨좊뵓','�뗭�',Dotum,'援대┝',Gulim,tahoma,NanumGothic,Helvetica,'Apple SD Gothic Neo',Sans-serif !important; }
+.bbs_page { margin-top:50px; text-align:center;}
+.bbs_page span { display:inline-block;  }
+
+
+/* 濡쒖슦利� 留덉슦�ㅼ삤踰� �④낵 洹몃┝�� */
+.bbs_rows_sh:hover { box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);}
+
+/* 濡쒖슦利� 留덉슦�ㅼ삤踰� �뺣낫 �붾낫湲� */
+.bbs_info:hover .bbs_info_more { display:block !important;}
+
+/* 濡쒖슦利� �쒕ぉ�� 泥댄겕諛뺤뒪 �꾩튂 */
+.bbs_rows_title label { display:inline-block; vertical-align:top; margin:3px 0px 0px 0px;}
+
+/* 濡쒖슦利� 踰덊샇�� 泥댄겕諛뺤뒪 �꾩튂 */
+.bbs_rows_num label { display:inline-block; vertical-align:top; margin:2px 0px 0px 0px;}
+
+
+/* 寃뚯떆�� 由ъ뒪�� 醫뚯슦 留덉쭊(���� 以묓삎 �뚰삎) */
+.bbs_rows_margin_01 .bbs_rows_margin { margin-left:30px;}
+.bbs_rows_margin_01 td:first-child .bbs_rows_margin { margin-left:0px;}
+
+
+/* 濡쒖슦利� 寃뚯떆�� 移댁슫��(�곗깋,�쇱슫��,��) */
+.bbs_cw {
+    margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 7px 20px;
+    vertical-align: middle;
+    font-size:14px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.1s ease-in-out;
+    transition-property: color, background-color, border-color;
+    border-radius:2em;
+    background-color: transparent;
+    color: #fff;
+    border:1px solid #fff;
+    outline:none;
+    position:relative;
+    margin-left:5px;
+}
+
+
+.bbs_cw_icon {
+    padding-left:40px !important;
+}
+
+.bbs_cw svg {
+    position:absolute;
+    top:6px;
+    left:16px;
+    color:#ffffff !important;
+}
+
+
+.bbs_cw_01 {
+    margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    display: inline-block;
+    box-sizing: border-box;
+    width:48px;
+    height:48px;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.1s ease-in-out;
+    transition-property: color, background-color, border-color;
+    border-radius:2em;
+    background-color: transparent;
+    color: #fff;
+    border:1px solid #fff;
+    outline:none;
+    position:relative;
+}
+
+.bbs_cw_01_icon {
+    padding-top:21px !important;
+}
+
+.bbs_cw_01 svg {
+    position:absolute;
+    top:3px;
+    left:15px;
+    color:#ffffff !important;
+}
+
+
+/* 寃뚯떆�� 濡쒖슦利� �뺣낫 援щ텇�� */
+.bbs_gubun_line { display:inline-block; height:12px; border-left:1px solid #e0e0e0; margin:0px 10px;}
+
+
+/* 寃뚯떆�� 由ъ뒪�� ���댄� 諛� */
+.bbs_list_title_bar td { text-align:center; color:#222222; height:60px; font-size:15px; font-family: 'Noto Sans KR' !important; font-weight:400 !important;}
+
+/* 寃뚯떆�� �묒꽦�� 遺�遺� */
+.bbs_name_cut { width:60px; height:22px; margin:0 auto;}
+.bbs_name_cut_01 { width:80px; height:22px; }
+
+/* 吏덈Ц怨쇰떟蹂� �꾩씠肄� */
+.bbs_radio_info_01 { display:inline-block; color:#ffffff; background:#5da7f7; border-radius:3px; padding:5px 10px; box-sizing: border-box;}
+.bbs_radio_info_02 { display:inline-block; color:#222222; background:#ffffff; border-radius:3px; padding:5px 10px; box-sizing: border-box; border:1px solid #e9e9e9; }
+
+
+
+
+
+/* 寃뚯떆�� �깅줉 �섏젙 */
+
+.bbs_reg_table > table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.bbs_reg_table > table th {
+    width:160px;
+    padding-left:20px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: normal;
+    color: #666;
+    text-transform: uppercase;
+    background-color:rgba(250, 250, 250, 1);
+    height:60px;
+    border-bottom: 1px solid #eaeaea;
+    border-right:1px solid #eaeaea;
+    font-family: 'Noto Sans KR' !important; font-weight:400 !important;
+
+}
+
+.bbs_reg_table > table td {
+    padding:10px 0px 10px 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.bbs_reg_table select {
+    width:200px;
+}
+
+
+/* �щ젰踰꾪듉 */
+.btn_bbs_cal { display:inline-block; background:#ffffff; text-align:center; border:1px solid #e5e5e5; border-radius:3px; height:40px; width:40px; vertical-align:middle; box-sizing: border-box; line-height:38px; margin-left:5px;}
+.btn_bbs_cal:hover { border:1px solid #b2b2b2 !important; }
+.btn_bbs_cal svg { margin-top:8px; }
+
+
+
+/* �꾨같諛⑹��� */
+.bbs_dobae { display:inline-block; color:#333333; background:#ffffff; font-size:15px; font-family: 'Noto Sans KR' !important; font-weight:500 !important; border:1px solid #e5e5e5; border-radius:0.3em; height:40px; vertical-align:middle; box-sizing: border-box; line-height:38px; padding:0px 10px;}
+
+/* 泥⑤��뚯씪紐� */
+.bbs_attach_file a { float:left; margin-right:10px;}
+
+
+
+/* 寃뚯떆�먰븯�⑤쾭��(�깅줉�섏젙) */
+.bbs_reg_bottom_btn { margin-top:20px; padding-top:20px; text-align:center;}
+.bbs_reg_bottom_btn a{ margin:0px 5px; }
+.bbs_reg_bottom_btn button { margin:0px 5px; }
+
+
+
+
+/* 寃뚯떆湲� 愿�由ы뙘�낆갹 */
+
+.bbs_move_table table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.bbs_move_table table th {
+    width:100px;
+    text-align:left;
+    font-size:15px;
+    font-family: 'Noto Sans KR' !important;
+    font-weight:400 !important;
+    color:#666666;
+    height:60px;
+    border-bottom:1px solid #eaeaea;
+}
+
+.bbs_move_table table td {
+    padding:10px 0px 10px 10px;
+    border-bottom:1px solid #eaeaea;
+    text-align:left;
+}
+
+
+
+/*�щ젰�� 寃뚯떆��_����(湲곗〈)*/
+.bbs_calendar table {border-collapse:collapse; }
+.bbs_calendar table td {border:1px solid #ececec; width:14.2%; background:#none;}
+.bbs_calendar table td:hover {background:#fdfdfd;}
+.bbs_calendar table td a {background:none;}
+.bbs_calendar table td a:hover {color:#000;}
+.bbs_calendar table td table td {border:none;}
+.bbs_calendar table td table td:hover {background:none;}
+
+/*�щ젰�� 寃뚯떆��_�뚰삎(湲곗〈)*/
+.bbs_calendar_small table {border-collapse:collapse; }
+.bbs_calendar_small table td {border:1px solid #ececec; width:14.2%; background:#none; vertical-align:middle;}
+.bbs_calendar_small table td table td {border:none;}
+.bbs_calendar_small table td table td:hover {background:none;}
+
+
+
+/* 寃뚯떆�� 移댁슫��(�곸꽭) */
+.bbs_cw_detail {
+    margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 9px 20px;
+    vertical-align: middle;
+    font-size:14px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.1s ease-in-out;
+    transition-property: color, background-color, border-color;
+    border-radius:2em;
+    background-color: transparent;
+    color: #333;
+    border:1px solid #e5e5e5;
+    outline:none;
+    position:relative;
+    margin-right:10px;
+}
+
+
+.bbs_cw_detail_icon {
+    padding-left:40px !important;
+}
+
+.bbs_cw_detail svg {
+    position:absolute;
+    top:7px;
+    left:16px;
+}
+
+
+
+/* 寃뚯떆�� sns �대�吏� */
+.bbs_sns_img img { width:32px; margin-left:10px; display:inline-block;}
+
+
+/* 寃뚯떆�� 怨듭쑀 留먰뭾��(�곸꽭) */
+
+.bbs_talk_box_sns {
+    position:absolute;
+    top:10px;
+    left:-60px;
+    z-index:1;
+    border-radius:5px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+    background:#fafafa;
+    border:1px solid #eaeaea;
+    padding:30px;
+    width:215px;
+}
+
+.bbs_talk_box_sns:after {
+    content:"";
+    position:absolute;
+    background:url('http://adblog.cgimall.co.kr/img/bg_talk_box_arrow.png');
+    top:-17px;
+    left:75px;
+    z-index:2;
+    width:17px;
+    height:17px;
+}
+
+
+
+/* 寃뚯떆�� 湲��댁씠媛��닿� 留먰뭾��(�곸꽭) */
+
+.bbs_detail_write_box {
+    position:absolute;
+    top:43px;
+    left:-81px;
+    z-index:2;
+    border-radius:5px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+    background:#fafafa;
+    border:1px solid #eaeaea;
+    padding:30px 30px 50px 30px;
+    width:470px;
+}
+
+.bbs_detail_write_box:after {
+    content:"";
+    position:absolute;
+    background:url('http://adblog.cgimall.co.kr/img/bg_talk_box_arrow.png');
+    top:-17px;
+    left:86px;
+    z-index:2;
+    width:17px;
+    height:17px;
+}
+
+
+/* 寃뚯떆�� �먯＜�섎뒗吏덈Ц 留먰뭾��(�곸꽭) */
+
+.bbs_detail_faq_box {
+
+    border-radius:5px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+    background:#fafafa;
+    border:1px solid #eaeaea;
+    padding:30px 30px 30px 30px;
+
+
+}
+
+
+
+
+/* 寃뚯떆�� �볤� 留먰뭾��(�곸꽭) */
+
+/* 醫뚯륫 */
+.bbs_comment_box {
+    position:relative;
+    border-radius:15px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+    background:#ffffff;
+    border:1px solid #eaeaea;
+    padding:30px;
+    margin-top:10px;
+}
+
+.bbs_comment_box:after {
+    content:"";
+    position:absolute;
+    background:url('http://adblog.cgimall.co.kr/img/bg_comment_box_arrow.png');
+    top:17px;
+    left:-17px;
+    width:17px;
+    height:17px;
+}
+/* �곗륫(�먯떊) */
+.bbs_comment_box_right {
+    position:relative;
+    border-radius:15px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+    background:#f2f9ff;
+    border:1px solid #eaeaea;
+    padding:30px;
+    margin-top:10px;
+}
+
+.bbs_comment_box_right:after {
+    content:"";
+    position:absolute;
+    background:url('http://adblog.cgimall.co.kr/img/bg_comment_box_arrow_right.png');
+    top:17px;
+    right:-17px;
+    width:17px;
+    height:17px;
+}
+
+/* �볤� �ㅼ뿬�곌린 紐⑤컮�� */
+.reply_content_depth { padding-left:80px; }
+
+
+/* �볤� �뚯썝 �ъ쭊 */
+.bbs_reply_member_img { border-radius:30px; width:60px; height:60px; }
+
+
+/* 寃뚯떆�� �곸꽭 �묒꽦�� �대┃�� 異쒕젰 �덉씠�� 硫붾돱 */
+
+.bbs_user_menu_layer { position:absolute; top:30px; left:0px; width:170px; border:1px solid #e9e9e9; z-index:1; box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1); border-radius:5px; background:#fafafa; padding:10px 0px; text-align:left;}
+.bbs_user_menu {  height:40px; line-height:40px; padding-left:20px; }
+.bbs_user_menu a{ display:block; }
+.bbs_user_menu:hover { background:#f15644; }
+.bbs_user_menu:hover a { color:#ffffff; }
+/* 寃뚯떆�� �곸꽭 �묒꽦�� �대┃�� 異쒕젰 �덉씠�� 硫붾돱 */
+
+/* �볤��곸뿭諛곌꼍 */
+.bg_reply_list { background:url('http://adblog.cgimall.co.kr/img/bg_reply_list.gif') left top  repeat; }
+/* �볤��곸뿭諛곌꼍 */
+
+/* 蹂몃Ц �먮룞�대�吏� */
+.bbs_img_auto_box { vertical-align:top; }
+.bbs_img_auto_box img { margin:10px 10px 0px 0px;}
+
+
+
+
+
+/* �꾩씠肄섑쉶�� */
+
+
+.sel_menu {
+    cursor:pointer;
+}
+
+.sel_menu .sel_menu_hover {
+    color:#999999 !important;
+    transition: 0.4s ease-in-out;
+    transition-property: transform;
+    transition-duration: .2s;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+.sel_menu.uk-open .sel_menu_hover {
+    color:#222222 !important;
+    transition: 0.4s ease-in-out;
+    transition-property: transform;
+    transition-duration: .2s;
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+
+/* �뚯씪�낅줈�쒗썑 �뚯씪紐� 異쒕젰�섎뒗 遺�遺� */
+.ajax_file_uploder_filename { border-radius:3em; font-size:15px; font-family: 'Noto Sans KR' !important; font-weight:400 !important; display:inline-block; padding:0 15px; margin-right:5px; border:1px solid #eaeaea; height:40px; line-height:38px; vertical-align:middle; box-sizing: border-box;}
+
+
+
+/* �볤��묒꽦 �띿뒪�몄뿉�대━�� 媛�濡쒓만�� */
+.short_comment_size { width:calc(100% - 140px); }
+
+
+/* �볤��곸뿭諛곌꼍 */
+.bg_reply_list { background:url('http://adblog.cgimall.co.kr/img/bg_reply_list.gif') left top  repeat; }
+/* �볤��곸뿭諛곌꼍 */
+
+.bbs_flow_info_icon { display:inline-block; color:#fff; font-size:15px; font-family: 'Noto Sans KR' !important; font-weight:400 !important; width:80px; padding:5px 0px; text-align:center; border-radius:3px; }
